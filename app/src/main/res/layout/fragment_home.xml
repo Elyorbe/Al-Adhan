@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout
+        android:id="@+id/night_background"
+        android:layout_width="match_parent"
+        android:layout_height="208dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/home_background3"
+
+        app:bottom_left_corner_radius="17dp"
+        app:bottom_right_corner_radius="17dp">
+
+        <TextView
+            android:id="@+id/home_greg_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="127dp"
+            android:text="13 May 2019"
+            android:textColor="#ffff"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/home_hijri_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="68dp"
+            android:text="8 Ramadan 1440"
+            android:textColor="#FFFF"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:text="Seoul, South Korea"
+            android:textColor="#ffff"
+            android:textSize="30sp" />
+    </com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout>
+
+    <com.jcminarro.roundkornerlayout.RoundKornerLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/border"
+        android:orientation="horizontal"
+        android:layout_margin="15dp"
+        app:bottom_right_corner_radius="30dp"
+        app:top_left_corner_radius="30dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/clock" />
+
+        <LinearLayout
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/home_prayer_name"
+                android:layout_width="127dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="15dp"
+                android:text="Asr Prayer"
+                android:textColor="#00ae3f"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/home_prayer_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-5dp"
+                android:layout_marginStart="20dp"
+                android:text="5:00 Pm"
+                android:textColor="#000000"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/home_next_prayer"
+                android:layout_width="127dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="20dp"
+                android:text="Next Prayer"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/home_next_prayer_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-5dp"
+                android:text="Maghrib 7:00 Pm"
+                android:textColor="#00ae3f"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </com.jcminarro.roundkornerlayout.RoundKornerLinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp">
+
+
+        <com.jcminarro.roundkornerlayout.RoundKornerLinearLayout
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:background="@drawable/border">
+
+        </com.jcminarro.roundkornerlayout.RoundKornerLinearLayout>
+
+        <com.jcminarro.roundkornerlayout.RoundKornerLinearLayout
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:background="@drawable/border_2">
+
+        </com.jcminarro.roundkornerlayout.RoundKornerLinearLayout>
+
+        <com.jcminarro.roundkornerlayout.RoundKornerLinearLayout
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:background="@drawable/border">
+
+        </com.jcminarro.roundkornerlayout.RoundKornerLinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center">
+
+
+        <com.jcminarro.roundkornerlayout.RoundKornerLinearLayout
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:background="@drawable/border">
+
+        </com.jcminarro.roundkornerlayout.RoundKornerLinearLayout>
+
+        <com.jcminarro.roundkornerlayout.RoundKornerLinearLayout
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:background="@drawable/border_2">
+
+        </com.jcminarro.roundkornerlayout.RoundKornerLinearLayout>
+
+        <com.jcminarro.roundkornerlayout.RoundKornerLinearLayout
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:background="@drawable/border">
+
+        </com.jcminarro.roundkornerlayout.RoundKornerLinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

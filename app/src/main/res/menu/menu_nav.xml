@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeItem"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/qiblaItem"
+        android:title="Qibla"
+        android:icon="@drawable/ic_compass"/>
+
+    <item
+        android:id="@+id/mosqueItem"
+        android:title="Mosque"
+        android:icon="@drawable/ic_mosque"/>
+    <item
+        android:id="@+id/calendarItem"
+        android:title="Calendar"
+        android:icon="@drawable/ic_calendar"/>
+    <item
+        android:id="@+id/settingsItem"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
+</menu>
