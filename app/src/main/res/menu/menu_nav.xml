@@ -11,16 +11,10 @@
         android:title="Qibla"
         android:icon="@drawable/ic_compass"/>
 
-    <item
-        android:id="@+id/mosqueItem"
-        android:title="Mosque"
-        android:icon="@drawable/ic_mosque"/>
+
     <item
         android:id="@+id/calendarItem"
         android:title="Calendar"
         android:icon="@drawable/ic_calendar"/>
-    <item
-        android:id="@+id/settingsItem"
-        android:title="Settings"
-        android:icon="@drawable/ic_settings"/>
+
 </menu>

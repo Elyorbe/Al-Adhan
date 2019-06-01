@@ -3,8 +3,8 @@ package com.example.prayerapp;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.icu.util.IslamicCalendar;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 
@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,9 @@ public class HomeFragment extends Fragment {
     String fajrTime, sunRiseTime, dhuhrTime, asrTime, maghribTime, ishaTime;
     String currentDate, currentTimeString, islamicDate;
     Date currentTime;
+    //variables to return to QiblaFragment
+    double currentLat, currentLong,currentAlt;
+
 
     @Nullable
     @Override
@@ -71,6 +75,8 @@ public class HomeFragment extends Fragment {
         currentPrayerName = (TextView) v.findViewById(R.id.home_current_prayer_name);
         hijriDate = (TextView) v.findViewById(R.id.home_hijri_time);
 
+        //Get Location
+        getLocation();
         /*Set Gregorian date*/
         currentDate = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date());
         todayDate.setText(currentDate);
@@ -78,10 +84,8 @@ public class HomeFragment extends Fragment {
         /*Set Islamic date*/
         Locale en = Locale.ENGLISH;
         UmmalquraCalendar islamicCal = new UmmalquraCalendar(en);
-        islamicDate = islamicCal.get(Calendar.DAY_OF_MONTH)+" " + islamicCal.getDisplayName(Calendar.MONTH, Calendar.LONG ,en) + " " + islamicCal.get(Calendar.YEAR);
+        islamicDate = islamicCal.get(Calendar.DAY_OF_MONTH) + " " + islamicCal.getDisplayName(Calendar.MONTH, Calendar.LONG, en) + " " + islamicCal.get(Calendar.YEAR);
         hijriDate.setText(islamicDate);
-
-
 
         /*Get current local time*/
         currentTimeString = new SimpleDateFormat("HH:mm ", Locale.getDefault()).format(Calendar.getInstance().getTime());
@@ -91,39 +95,14 @@ public class HomeFragment extends Fragment {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        /*Set default timings before updating location*/
-        mQueue = Volley.newRequestQueue(getActivity());
-        jsonParse();
+
 
 
         /*Update location*/
         updateLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Get location*/
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
-                        PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1000);
-                } else {
-                    LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-                    Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-
-                    try {
-                        //update city and current values
-                        cityName = hereLocation(location.getLatitude(), location.getLongitude());
-                        cityNameTv.setText(cityName + ", " + countryName);
-
-                        /*Update prayer timings using api*/
-                        mQueue = Volley.newRequestQueue(getActivity());
-                        jsonParse();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(getActivity(), "Please check location settings", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-
+                getLocation();
             }
         });
 
@@ -144,7 +123,8 @@ public class HomeFragment extends Fragment {
                         return;
                     }
                     Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
+                    currentLat = location.getLatitude();
+                    currentLong = location.getLongitude();
 
                     try {
                         cityName = hereLocation(location.getLatitude(), location.getLongitude());
@@ -234,7 +214,7 @@ public class HomeFragment extends Fragment {
                                 currentPrayerName.setText("Maghrib");
                                 nextPrayerTimeTv.setText("Isha ");
                                 nextPrayerTimeTv.append(ishaTime);
-                            } else{
+                            } else {
                                 prayerTimeTv.setText(ishaTime);
                                 currentPrayerName.setText("Isha");
                                 nextPrayerTimeTv.setText("Fajr ");
@@ -253,6 +233,40 @@ public class HomeFragment extends Fragment {
             }
         });
         mQueue.add(request);
+    }
+
+
+
+    /*Get location */
+    public void getLocation(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1000);
+        } else {
+
+            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            try {
+                //update city and current values
+                cityName = hereLocation(location.getLatitude(), location.getLongitude());
+                cityNameTv.setText(cityName + ", " + countryName);
+                currentLat = location.getLatitude();
+                currentLong = location.getLongitude();
+                currentAlt = location.getAltitude();
+                Log.d("Lat: ", String.valueOf(currentLat));
+                Log.d("Long: ", String.valueOf(currentLong));
+
+                /*Update prayer timings using api*/
+                mQueue = Volley.newRequestQueue(getActivity());
+                jsonParse();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getActivity(), "Please check location settings", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
     }
 }
 
