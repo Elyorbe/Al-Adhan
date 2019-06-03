@@ -42,5 +42,13 @@
         android:textColor="#000"
         android:text="City"
         android:textSize="20sp"/>
+    <ImageView
+        android:id="@+id/qibla_update"
+        android:layout_marginTop="10dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/refresh"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/city_name"/>
 
 </RelativeLayout>

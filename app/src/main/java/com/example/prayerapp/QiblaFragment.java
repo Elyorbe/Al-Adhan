@@ -48,9 +48,9 @@ public class QiblaFragment extends Fragment implements SensorEventListener {
 
 
     double currentLat, currentLong;
-    String currentCity;
+    String currentCity = "Tashkent";//default value
 
-    ImageView imgCompass;
+    ImageView imgCompass, updateLocation;
     TextView azimuthTv, cityNameTv;
     int azimuth;
     private SensorManager mSensorManager;
@@ -69,11 +69,13 @@ public class QiblaFragment extends Fragment implements SensorEventListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_qibla, container, false);
 
+        //default values before location update
+        currentLat =41.2995;
+        currentLong = 69.2401;
 
         Location startingLocation = new Location(LocationManager.NETWORK_PROVIDER);
-        getLocation();
-        startingLocation.setLatitude(37.5665);
-        startingLocation.setLongitude(126.9780);
+        startingLocation.setLatitude(currentLat);
+        startingLocation.setLongitude(currentLong);
         Log.d("CurrentLatitude", String.valueOf(currentLat));
         Log.d("CurrentLongitude", String.valueOf(currentLong));
         Location destinationlocation = new Location(LocationManager.NETWORK_PROVIDER);
@@ -85,7 +87,15 @@ public class QiblaFragment extends Fragment implements SensorEventListener {
         imgCompass = (ImageView) v.findViewById(R.id.img_compass);
         azimuthTv = (TextView) v.findViewById(R.id.txt_azimuth);
         cityNameTv = (TextView) v.findViewById(R.id.city_name);
+        updateLocation = (ImageView) v.findViewById(R.id.qibla_update);
         start();
+        updateLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getLocation();
+
+            }
+        });
 
         return v;
     }
@@ -148,8 +158,40 @@ public class QiblaFragment extends Fragment implements SensorEventListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1000);
+
         } else {
 
+
+                LocationManager locManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+                boolean network_enabled = locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+                Location location;
+                if (network_enabled) {
+
+                    location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+                    if (location != null) {
+                        currentLat = location.getLatitude();
+                        currentLong = location.getLongitude();
+                        currentCity = hereLocation(location.getLatitude(), location.getLongitude());
+                        cityNameTv.setText(currentCity);
+                        Location startingLocation = new Location(LocationManager.NETWORK_PROVIDER);
+                        startingLocation.setLatitude(currentLat);
+                        startingLocation.setLongitude(currentLong);
+                        Location destinationlocation = new Location(LocationManager.NETWORK_PROVIDER);
+                        destinationlocation.setLatitude(21.422487);//kaaba latitude setting
+                        destinationlocation.setLongitude(39.826206);//kaaba longitude setting
+                        bearing = 360 + (int) startingLocation.bearingTo(destinationlocation);
+                        cityNameTv.setText(currentCity);
+                        cityNameTv.append(": " +  bearing + "°");
+
+
+                    }
+                }else
+                Toast.makeText(getActivity(), "Please check location settings and enable network location access", Toast.LENGTH_SHORT).show();
+            }
+            /*
             LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
             Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
@@ -157,6 +199,8 @@ public class QiblaFragment extends Fragment implements SensorEventListener {
                 //update city and current values
                 currentCity = hereLocation(location.getLatitude(), location.getLongitude());
                 cityNameTv.setText(currentCity);
+                Log.v("as", "currentLat = " + location.getLatitude());
+                Log.v("as", "currentLon = " + location.getLongitude());
                 currentLat = location.getLatitude();
                 currentLong = location.getLongitude();
 
@@ -166,7 +210,8 @@ public class QiblaFragment extends Fragment implements SensorEventListener {
                 e.printStackTrace();
                 Toast.makeText(getActivity(), "Please check location settings", Toast.LENGTH_SHORT).show();
             }
-        }
+            */
+
 
 
     }

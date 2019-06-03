@@ -17,7 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +58,6 @@ public class HomeFragment extends Fragment {
     String fajrTime, sunRiseTime, dhuhrTime, asrTime, maghribTime, ishaTime;
     String currentDate, currentTimeString, islamicDate;
     Date currentTime;
-    //variables to return to QiblaFragment
-    double currentLat, currentLong,currentAlt;
 
 
     @Nullable
@@ -75,8 +73,11 @@ public class HomeFragment extends Fragment {
         currentPrayerName = (TextView) v.findViewById(R.id.home_current_prayer_name);
         hijriDate = (TextView) v.findViewById(R.id.home_hijri_time);
 
-        //Get Location
-        getLocation();
+
+
+        //defalut values before location update
+        mQueue = Volley.newRequestQueue(getActivity());
+        jsonParse();
         /*Set Gregorian date*/
         currentDate = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date());
         todayDate.setText(currentDate);
@@ -123,8 +124,7 @@ public class HomeFragment extends Fragment {
                         return;
                     }
                     Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                    currentLat = location.getLatitude();
-                    currentLong = location.getLongitude();
+
 
                     try {
                         cityName = hereLocation(location.getLatitude(), location.getLongitude());
@@ -251,18 +251,14 @@ public class HomeFragment extends Fragment {
                 //update city and current values
                 cityName = hereLocation(location.getLatitude(), location.getLongitude());
                 cityNameTv.setText(cityName + ", " + countryName);
-                currentLat = location.getLatitude();
-                currentLong = location.getLongitude();
-                currentAlt = location.getAltitude();
-                Log.d("Lat: ", String.valueOf(currentLat));
-                Log.d("Long: ", String.valueOf(currentLong));
 
                 /*Update prayer timings using api*/
                 mQueue = Volley.newRequestQueue(getActivity());
                 jsonParse();
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity(), "Please check location settings", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Please check location settings and enable network location access" +
+                        "", Toast.LENGTH_SHORT).show();
             }
         }
 
