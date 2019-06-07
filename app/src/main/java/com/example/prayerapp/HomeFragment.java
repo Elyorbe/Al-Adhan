@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 
@@ -72,7 +71,6 @@ public class HomeFragment extends Fragment {
         nextPrayerTimeTv = (TextView) v.findViewById(R.id.home_next_prayer_time);
         currentPrayerName = (TextView) v.findViewById(R.id.home_current_prayer_name);
         hijriDate = (TextView) v.findViewById(R.id.home_hijri_time);
-
 
 
         //defalut values before location update
@@ -236,9 +234,8 @@ public class HomeFragment extends Fragment {
     }
 
 
-
     /*Get location */
-    public void getLocation(){
+    public void getLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1000);

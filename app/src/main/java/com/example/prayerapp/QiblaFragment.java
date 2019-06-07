@@ -76,8 +76,7 @@ public class QiblaFragment extends Fragment implements SensorEventListener {
         Location startingLocation = new Location(LocationManager.NETWORK_PROVIDER);
         startingLocation.setLatitude(currentLat);
         startingLocation.setLongitude(currentLong);
-        Log.d("CurrentLatitude", String.valueOf(currentLat));
-        Log.d("CurrentLongitude", String.valueOf(currentLong));
+
         Location destinationlocation = new Location(LocationManager.NETWORK_PROVIDER);
         destinationlocation.setLatitude(21.422487);//kaaba latitude setting
         destinationlocation.setLongitude(39.826206);//kaaba longitude setting

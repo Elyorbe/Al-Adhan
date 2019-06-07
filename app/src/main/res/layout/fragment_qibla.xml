@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/txt_azimuth"
@@ -13,7 +14,7 @@
         android:layout_margin="30dp"
         android:text="0"
         android:textSize="40sp"
-        android:textColor="#000" />
+        android:textColor="@color/green" />
     <ImageView
         android:id="@+id/img_compass"
         android:layout_width="match_parent"
@@ -39,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/approx_qibla_direction"
         android:textAlignment="center"
-        android:textColor="#000"
+        android:textColor="@color/green"
         android:text="City"
         android:textSize="20sp"/>
     <ImageView
