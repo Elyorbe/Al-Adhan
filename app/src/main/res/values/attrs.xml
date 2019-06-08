@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CalendarView">
+        <attr name="dateFormat" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="HijriCalendarView">
+        <attr name="hijrF" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="f">
+        <attr name="test" format="string"/>
+    </declare-styleable>
+</resources>

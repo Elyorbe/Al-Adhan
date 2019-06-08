@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--Layout for Hijri Calendar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <!-- date toolbar-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp">
+
+            <!-- prev button -->
+            <ImageView
+                android:id="@+id/calendar_prev_button_hijri"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/prev_icon"/>
+            <!-- date title -->
+            <TextView
+                android:id="@+id/calendar_date_display_hijri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/calendar_prev_button_hijri"
+                android:layout_toLeftOf="@id/calendar_next_button_hijri"
+                android:gravity="center"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textColor="@color/green"
+                android:text="current date"/>
+
+            <!-- next button -->
+            <ImageView
+                android:id="@+id/calendar_next_button_hijri"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/next_icon"/>
+
+        </RelativeLayout>
+
+        <!-- days header -->
+        <LinearLayout
+            android:id="@+id/calender_header_hijri"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/green"
+                android:text="SUN"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/green"
+                android:text="MON"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/green"
+                android:text="TUE"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/green"
+                android:text="WED"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/green"
+                android:text="THU"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/green"
+                android:text="FRI"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/green"
+                android:text="SAT"/>
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/calendar_grid_hijri"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="7"/>
+    </LinearLayout>
+
+
+</LinearLayout>
